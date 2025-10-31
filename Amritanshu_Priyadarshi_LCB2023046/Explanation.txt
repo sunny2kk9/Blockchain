@@ -1,0 +1,46 @@
+Overview
+This contract is a simple lending pool: people can deposit an ERC-20 asset to provide liquidity, borrowers can lock up some collateral token and borrow the asset, borrowers pay interest over time, and if a loan becomes undercollateralized anyone can liquidate it. The owner can tweak risk parameters and rescue unrelated tokens.
+
+Main pieces (big picture)
+
+asset: the token everyone borrows and lends (lenders deposit this).
+
+collateral: the token borrowers lock up to secure loans.
+
+Liquidity providers get “shares” when they deposit; shares represent their slice of the pool.
+
+Each borrower has one Loan record (principal, when they borrowed, collateral amount, active flag).
+
+ltvBP, annualBorrowRateBP, and priceCollateralToAsset control risk: loan-to-value (in basis points), annual interest rate (in basis points), and collateral price relative to asset.
+
+Walkthrough of important functions (what happens and why)
+
+Constructor
+When the pool is created it sets the asset & collateral tokens and initial risk params (ltv, rate, price). It also ensures tokens aren’t the zero address and LTV is sensible.
+
+deposit(amount)
+A lender calls this and transfers amount of the asset into the pool. The function mints pool shares for the lender proportional to their deposit vs pool size. Shares let the pool track each lender’s ownership without moving their tokens around each time interest accrues. totalLiquidity tracks how many asset tokens are available to lend.
+
+withdraw(shareAmount)
+Burns some of your shares and returns the underlying asset amount that those shares represent. This is how liquidity providers exit and take back their funds.
+
+availableLiquidity()
+Simple helper: how much asset is available for borrowing (tracked by totalLiquidity).
+
+borrow(amount, collateralAmount)
+Borrower must not already have an active loan. They must transfer collateralAmount into the contract. The contract checks the collateral’s value (using priceCollateralToAsset) and enforces the LTV limit so borrowers can only take up to maxBorrow. If OK, the pool reduces totalLiquidity and sends the borrowed asset to the borrower. Loan metadata (principal, timestamp, collateral) is recorded.
+
+repay()
+Borrower pays back principal + accrued interest (interest calculated pro-rata on time elapsed). The function pulls the owed asset tokens from the borrower, marks the loan inactive, returns their collateral, and increases pool liquidity by the amount repaid.
+
+liquidate(borrower)
+If a borrower’s debt (principal + accrued interest) exceeds what their collateral supports under the LTV rule, anyone can liquidate. The liquidator provides the owed asset amount to the contract, the loan is closed, and the liquidator receives the borrower’s collateral. This punishes bad positions and protects lenders.
+
+setParams(...)
+Only the contract owner can update LTV, annual rate, and collateral price. That lets the protocol respond to market changes or adjust risk.
+
+emergencyWithdrawToken(...)
+Owner-only escape hatch to pull unrelated tokens that accidentally got sent to the contract (but it blocks withdrawing the main asset or collateral).
+
+_interest calculation
+Interest is simple linear interest: principal * annualRate * timeElapsed / (BP_DIVISOR * 365 days). So interest accrues continuously and is added to what the borrower repays.
