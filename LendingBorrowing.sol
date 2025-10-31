@@ -45,10 +45,8 @@ contract LendingBorrowing is Ownable, ReentrancyGuard {
         require(msg.value > 0, "Collateral required");
         require(amount > 0, "Amount must be > 0");
         
-        // Check if contract has enough tokens to lend
         require(token.balanceOf(address(this)) >= totalLent + amount, "Insufficient funds available");
         
-        // Check collateral sufficiency (150% collateralization)
         uint256 requiredCollateral = (amount * COLLATERAL_RATIO) / 100;
         require(msg.value >= requiredCollateral, "Insufficient collateral");
 
@@ -85,7 +83,6 @@ contract LendingBorrowing is Ownable, ReentrancyGuard {
         require(lenderBalances[msg.sender] >= amount, "Insufficient balance");
         require(amount > 0, "Amount must be > 0");
         
-        // Ensure we don't withdraw funds that are currently lent out
         uint256 availableToWithdraw = token.balanceOf(address(this)) - totalLent;
         require(amount <= availableToWithdraw, "Insufficient available funds");
         
