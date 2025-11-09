@@ -1,0 +1,22 @@
+{
+  "name": "blockchain-lab-storage-contract",
+  "version": "1.0.0",
+  "description": "Blockchain lab project with getter/setter smart contract and frontend interface",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server -p 8080 -o",
+    "dev": "npx http-server -p 8080 -o"
+  },
+  "keywords": [
+    "blockchain",
+    "ethereum",
+    "smart-contract",
+    "web3"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
+
