@@ -31,5 +31,5 @@ It combines smart contract creation, testing, deployment, and frontend interacti
 
 ---
 
-**Author:** *Sagili Nithin (LCI2023010)*  
+**Author:** *Sagili Nithin (LCI2023040)*  
 **Blockchain Lab Project | 2025*
