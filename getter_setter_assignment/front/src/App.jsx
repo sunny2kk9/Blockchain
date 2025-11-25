@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import { ethers } from 'ethers'
 
-const CONTRACT_ADDRESS = '0x63eA0F7C1c0D7E59E41C09a13a625b9391152987'
+const CONTRACT_ADDRESS = '0x94fbeD41419B4EA7CDa03395b1F4244E875fB071'
 
 const ABI = [
   { "inputs": [{ "internalType": "uint256", "name": "_value", "type": "uint256" }], "name": "setValue", "outputs": [], "stateMutability": "nonpayable", "type": "function" },
@@ -119,7 +119,7 @@ export default function App() {
   return (
     <div style={styles.page}>
       <div style={styles.card}>
-        <h2>SimpleStorage (fixed read/write)</h2>
+        <h2>Amritanshu Dapp(fixed read/write)</h2>
         <div>Connected account: <code>{account ?? 'not connected'}</code></div>
         <div style={{ marginTop: 12 }}>
           <button onClick={connectWallet} style={styles.btnPrimary}>Connect Wallet</button>
