@@ -1,10 +1,10 @@
 [package]
-name = "assignment3"
+name = "random_game_module"
 version = "1.0.0"
 authors = []
 
 [addresses]
-module_owner='_'
+module_owner='0xfb24b9c6188adace724d44ea15ad560f5b4aa5f67c51672f7fe910cc2e617f2'
 [dev-addresses]
 
 [dependencies.AptosFramework]
