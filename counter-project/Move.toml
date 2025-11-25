@@ -1,0 +1,14 @@
+[package]
+name = "counter"
+version = "0.0.1"
+authors = ["you"]
+
+[dependencies]
+# Pull in the Aptos framework source so std modules (signer, vector, etc.) are available.
+AptosFramework = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/aptos-framework", rev = "main" }
+
+[addresses]
+# standard library / framework live at 0x1 on Aptos
+std = "0x1"
+AptosFramework = "0x1"
+Counter = "0x0e5a845cf7109326af12e3231e3f7d3f3d56ea122097557abba15870cbdaa265"
