@@ -1,139 +1,144 @@
-// src/App.jsx
-import React, { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { ethers } from 'ethers'
+import './App.css'
+import abi from './abi/simplestorage.json'
 
-const CONTRACT_ADDRESS = '0x63eA0F7C1c0D7E59E41C09a13a625b9391152987'
+const CONTRACT_ADDRESS = '0x794298a4022559a28B57cbedEa2dDABE6b7D86fd'
 
-const ABI = [
-  { "inputs": [{ "internalType": "uint256", "name": "_value", "type": "uint256" }], "name": "setValue", "outputs": [], "stateMutability": "nonpayable", "type": "function" },
-  { "inputs": [], "name": "getValue", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" },
-  {
-    "anonymous": false, "inputs": [
-      { "indexed": true, "internalType": "uint256", "name": "newValue", "type": "uint256" },
-      { "indexed": true, "internalType": "address", "name": "changedBy", "type": "address" }
-    ], "name": "ValueChanged", "type": "event"
-  }
-]
-
+// const ABI = [
+//   { "inputs": [{ "internalType": "uint256", "name": "_value", "type": "uint256" }], "name": "setValue", "outputs": [], "stateMutability": "nonpayable", "type": "function" },
+//   { "inputs": [], "name": "getValue", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }
+// ]
+const ABI = abi.abi
 export default function App() {
-  const [provider, setProvider] = useState(null)
-  const [signer, setSigner] = useState(null)
-  const [account, setAccount] = useState(null)
+  const [account, setAccount] = useState('')
   const [value, setValue] = useState('')
   const [inputValue, setInputValue] = useState('')
-  const [status, setStatus] = useState('')
-
-  useEffect(() => {
-    if (typeof window !== 'undefined' && window.ethereum) {
-      try {
-        const p = (ethers.BrowserProvider) ? new ethers.BrowserProvider(window.ethereum) : new ethers.providers.Web3Provider(window.ethereum)
-        setProvider(p)
-      } catch (err) {
-        setStatus('Provider init error: ' + err.message)
-      }
-    } else {
-      setStatus('No web3 wallet found (install MetaMask)')
-    }
-  }, [])
-
-  useEffect(() => {
-    if (!provider) return
-    ;(async () => {
-      try {
-        const accounts = await provider.send('eth_accounts', [])
-        if (accounts.length) {
-          setAccount(accounts[0])
-          const s = await provider.getSigner()
-          setSigner(s)
-          setStatus('Ready')
-        } else {
-          setStatus('Wallet not connected')
-        }
-      } catch (err) {
-        setStatus('Error reading accounts: ' + err.message)
-      }
-    })()
-  }, [provider])
+  const [status, setStatus] = useState('Not connected')
 
   const connectWallet = async () => {
-    if (!provider) return setStatus('No provider (install MetaMask)')
     try {
-      const accounts = await provider.send('eth_requestAccounts', [])
+      if (!window.ethereum) {
+        setStatus('Please install MetaMask!')
+        return
+      }
+      const accounts = await window.ethereum.request({
+        method: 'eth_requestAccounts',
+      })
       setAccount(accounts[0])
-      const s = await provider.getSigner()
-      setSigner(s)
-      setStatus('Wallet connected')
+      setStatus('Connected')
     } catch (err) {
-      setStatus('Connection failed: ' + (err.message || err))
+      setStatus('Failed to connect: ' + err.message)
     }
+  }
+
+  const disconnectWallet = () => {
+    setAccount('')
+    setValue('')
+    setInputValue('')
+    setStatus('Disconnected')
   }
 
   const fetchValue = async () => {
-    if (!provider) return setStatus('Provider not initialized')
     try {
-      setStatus('Reading value...')
-      const readContract = new ethers.Contract(CONTRACT_ADDRESS, ABI, provider)
-      const v = await readContract.getValue()
-      setValue(v.toString())
+      if (!window.ethereum) {
+        setStatus('Please install MetaMask!')
+        return
+      }
+      setStatus('Reading...')
+      const provider = new ethers.BrowserProvider(window.ethereum)
+      const contract = new ethers.Contract(CONTRACT_ADDRESS, ABI, provider)
+      const result = await contract.getValue()
+      console.log(result)
+      setValue(result.toString())
       setStatus('Value loaded')
     } catch (err) {
-      setStatus('Read failed: ' + (err.message || err))
+      setStatus('Read failed: ' + err.message)
     }
   }
 
   const writeValue = async () => {
-    if (!signer) return setStatus('Wallet not connected (signer missing)')
-    if (inputValue === '') return setStatus('Enter a value')
     try {
+      if (!window.ethereum) {
+        setStatus('Please install MetaMask!')
+        return
+      }
+      if (!account) {
+        setStatus('Please connect wallet first')
+        return
+      }
+      if (!inputValue) {
+        setStatus('Please enter a value')
+        return
+      }
       setStatus('Sending transaction...')
-      const writeContract = new ethers.Contract(CONTRACT_ADDRESS, ABI, signer)
-      const tx = await writeContract.setValue(BigInt(inputValue))
-      setStatus('Transaction sent: ' + tx.hash)
+      const provider = new ethers.BrowserProvider(window.ethereum)
+      const signer = await provider.getSigner()
+      const contract = new ethers.Contract(CONTRACT_ADDRESS, ABI, signer)
+      const tx = await contract.setValue(inputValue)
+      setStatus('Waiting for confirmation...')
       await tx.wait()
-      setStatus('Transaction confirmed')
-      fetchValue()
+      setStatus('Transaction confirmed!')
+      await fetchValue()
     } catch (err) {
-      setStatus('Write failed: ' + (err.message || err))
+      setStatus('Write failed: ' + err.message)
     }
-  }
-
-  useEffect(() => {
-    if (!provider) return
-    const readContract = new ethers.Contract(CONTRACT_ADDRESS, ABI, provider)
-    const handler = (newValue, changedBy) => {
-      setValue(newValue.toString())
-      setStatus(`ValueChanged: ${newValue.toString()} by ${changedBy}`)
-    }
-    readContract.on('ValueChanged', handler)
-    return () => {
-      try { readContract.off('ValueChanged', handler) } catch (e) {}
-    }
-  }, [provider])
-
-  const styles = {
-    page: { minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 24, background: '#f3f4f6' },
-    card: { width: '100%', maxWidth: 720, background: '#fff', padding: 24, borderRadius: 12, boxShadow: '0 8px 24px rgba(0,0,0,0.06)' },
-    btnPrimary: { padding: '10px 14px', background: '#2563eb', color: 'white', border: 'none', borderRadius: 8, cursor: 'pointer' }
   }
 
   return (
-    <div style={styles.page}>
-      <div style={styles.card}>
-        <h2>SimpleStorage (fixed read/write)</h2>
-        <div>Connected account: <code>{account ?? 'not connected'}</code></div>
-        <div style={{ marginTop: 12 }}>
-          <button onClick={connectWallet} style={styles.btnPrimary}>Connect Wallet</button>
-          <button onClick={fetchValue} style={{ marginLeft: 10 }}>Read Value</button>
+    <div className='container'>
+      <div className='card'>
+        <h1>DApp</h1>
+
+        <div className='section'>
+          <h3>Wallet Connection</h3>
+          {!account ? (
+            <button
+              onClick={connectWallet}
+              className='btn btn-primary'>
+              Connect Wallet
+            </button>
+          ) : (
+            <>
+              <p className='account'>
+                Account: {account.slice(0, 6)}...{account.slice(-4)}
+              </p>
+              <button
+                onClick={disconnectWallet}
+                className='btn btn-disconnect'>
+                Disconnect
+              </button>
+            </>
+          )}
         </div>
-        <div style={{ marginTop: 12 }}>
-          <div>Stored value:</div>
-          <div style={{ fontFamily: 'monospace', fontSize: 24 }}>{value === '' ? '—' : value}</div>
+
+        <div className='section'>
+          <h3>Read Contract</h3>
+          <button
+            onClick={fetchValue}
+            className='btn'>
+            Get Value
+          </button>
+          <div className='value-display'>{value || '—'}</div>
         </div>
-        <div style={{ marginTop: 12 }}>
-          <input type="number" value={inputValue} onChange={e => setInputValue(e.target.value)} placeholder="new numeric value" />
-          <button onClick={writeValue} style={{ marginLeft: 8 }}>Set Value</button>
+
+        <div className='section'>
+          <h3>Write Contract</h3>
+          <input
+            type='number'
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            placeholder='Enter value'
+            className='input'
+          />
+          <button
+            onClick={writeValue}
+            className='btn'>
+            Set Value
+          </button>
         </div>
-        <div style={{ marginTop: 12, color: '#6b7280' }}>{status}</div>
+
+        <div className='status'>{status}</div>
       </div>
     </div>
   )

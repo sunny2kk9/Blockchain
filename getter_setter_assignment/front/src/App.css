@@ -1,2 +1,128 @@
-;
-@tailwind utilities;
+.container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 40px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 30px;
+  text-align: center;
+  font-size: 28px;
+}
+
+h3 {
+  color: #555;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.section {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.section:last-of-type {
+  border-bottom: none;
+}
+
+.btn {
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s;
+  width: 100%;
+}
+
+.btn:hover {
+  background: #5568d3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-primary {
+  background: #764ba2;
+}
+
+.btn-primary:hover {
+  background: #653a8a;
+}
+
+.btn-disconnect {
+  background: #dc3545;
+  margin-top: 10px;
+}
+
+.btn-disconnect:hover {
+  background: #c82333;
+}
+
+.account {
+  margin-top: 10px;
+  padding: 10px;
+  background: #f0f0f0;
+  border-radius: 6px;
+  font-family: monospace;
+  font-size: 14px;
+  word-break: break-all;
+}
+
+.value-display {
+  margin-top: 15px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  font-size: 32px;
+  font-weight: bold;
+  color: #667eea;
+  text-align: center;
+  font-family: monospace;
+}
+
+.input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.status {
+  margin-top: 20px;
+  padding: 15px;
+  background: #e8f4f8;
+  border-radius: 8px;
+  text-align: center;
+  color: #555;
+  font-size: 14px;
+  min-height: 20px;
+}
