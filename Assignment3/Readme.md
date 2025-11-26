@@ -3,12 +3,12 @@
 ## 📄 Contract Overview
 
 **Deployment Address:**  
-`0xd5717b104564aae69e2c09382734b6189e61c232547c2a843c795783dd03488b`
+`0xd5717b104564aae69e2c09382734b6189e61c232547c2a843c795783dd03488b
 
 **Network:** Aptos Devnet
 
 **Explorer:**  
-[View on Aptos Explorer](https://explorer.aptoslabs.com/txn/0xd5717b104564aae69e2c09382734b6189e61c232547c2a843c795783dd03488b?network=devnet)
+[View on Aptos Explorer](https://explorer.aptoslabs.com/txn/0x3001f8d26301cdc9a04019e0aa447b2dd6f39180a9859c56f87d875edbe3d0db?network=devnet)
 
 ---
 
