@@ -1,0 +1,213 @@
+pragma solidity ^0.8.19;
+
+import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
+
+contract SimpleLending is ReentrancyGuard, Ownable {
+    using SafeERC20 for IERC20;
+
+    IERC20 public immutable asset;
+    IERC20 public immutable collateral;
+
+    AggregatorV3Interface public priceFeed; 
+
+    uint256 public totalShares;
+    mapping(address => uint256) public shares;
+
+    uint256 public ltvBP;
+    uint256 public annualBorrowRateBP;
+    uint256 public liquidationBonusBP;
+
+    uint256 constant BP_DIVISOR = 10000;
+    uint256 constant RAY = 1e18;
+
+    struct Loan {
+        uint256 principal;
+        uint256 borrowTimestamp;
+        uint256 collateralAmount;
+        bool active;
+    }
+
+    mapping(address => Loan) public loans;
+
+    event Deposit(address indexed user, uint256 amount, uint256 sharesMinted);
+    event Withdraw(address indexed user, uint256 sharesBurned, uint256 amount);
+    event Borrow(address indexed user, uint256 amount, uint256 collateralAmount);
+    event Repay(address indexed user, uint256 repaidPrincipal, uint256 repaidInterest);
+    event Liquidate(address indexed liquidator, address indexed borrower, uint256 seizedCollateral, uint256 repaid);
+    event ParamsUpdated(uint256 ltvBP, uint256 annualBorrowRateBP, uint256 liquidationBonusBP);
+    event OracleUpdated(address priceFeed);
+
+    constructor(
+        IERC20 _asset,
+        IERC20 _collateral,
+        uint256 _ltvBP,
+        uint256 _annualBorrowRateBP,
+        uint256 _liquidationBonusBP,
+        address _priceFeed
+    ) {
+        require(address(_asset) != address(0) && address(_collateral) != address(0), "zero token");
+        require(_ltvBP <= BP_DIVISOR, "ltv>100%");
+        require(_priceFeed != address(0), "zero oracle");
+
+        asset = _asset;
+        collateral = _collateral;
+        ltvBP = _ltvBP;
+        annualBorrowRateBP = _annualBorrowRateBP;
+        liquidationBonusBP = _liquidationBonusBP;
+        priceFeed = AggregatorV3Interface(_priceFeed);
+    }
+
+
+    function totalLiquidity() public view returns (uint256) {
+        return asset.balanceOf(address(this));
+    }
+
+    function deposit(uint256 amount) external nonReentrant {
+        require(amount > 0, "zero deposit");
+        asset.safeTransferFrom(msg.sender, address(this), amount);
+
+        uint256 sharesToMint = totalShares == 0 ? amount : (amount * totalShares) / totalLiquidity();
+        require(sharesToMint > 0, "zero shares");
+
+        shares[msg.sender] += sharesToMint;
+        totalShares += sharesToMint;
+
+        emit Deposit(msg.sender, amount, sharesToMint);
+    }
+
+    function withdraw(uint256 shareAmount) external nonReentrant {
+        require(shareAmount > 0, "zero shares");
+        require(shares[msg.sender] >= shareAmount, "insufficient shares");
+        require(totalShares > 0, "empty pool");
+
+        uint256 amount = (shareAmount * totalLiquidity()) / totalShares;
+
+        shares[msg.sender] -= shareAmount;
+        totalShares -= shareAmount;
+
+        asset.safeTransfer(msg.sender, amount);
+        emit Withdraw(msg.sender, shareAmount, amount);
+    }
+
+    function borrow(uint256 amount, uint256 collateralAmount) external nonReentrant {
+        require(amount > 0 && collateralAmount > 0, "invalid args");
+        require(!loans[msg.sender].active, "existing loan");
+        require(totalLiquidity() >= amount, "not enough liquidity");
+
+        uint256 collateralValue = _collateralValueInAsset(collateralAmount);
+        uint256 maxBorrow = (collateralValue * ltvBP) / BP_DIVISOR;
+        require(amount <= maxBorrow, "exceeds LTV");
+
+        collateral.safeTransferFrom(msg.sender, address(this), collateralAmount);
+
+        loans[msg.sender] = Loan({
+            principal: amount,
+            borrowTimestamp: block.timestamp,
+            collateralAmount: collateralAmount,
+            active: true
+        });
+
+        asset.safeTransfer(msg.sender, amount);
+
+        emit Borrow(msg.sender, amount, collateralAmount);
+    }
+
+    function repay() external nonReentrant {
+        Loan storage loan = loans[msg.sender];
+        require(loan.active, "no loan");
+
+        uint256 interest = _calculateInterest(loan.principal, block.timestamp - loan.borrowTimestamp);
+        uint256 owed = loan.principal + interest;
+
+        asset.safeTransferFrom(msg.sender, address(this), owed);
+
+        uint256 collateralToReturn = loan.collateralAmount;
+        _resetLoan(loan);
+
+        collateral.safeTransfer(msg.sender, collateralToReturn);
+
+        emit Repay(msg.sender, owed - interest, interest);
+    }
+
+    function liquidate(address borrower) external nonReentrant {
+        Loan storage loan = loans[borrower];
+        require(loan.active, "no loan");
+
+        uint256 interest = _calculateInterest(loan.principal, block.timestamp - loan.borrowTimestamp);
+        uint256 owed = loan.principal + interest;
+
+        uint256 collateralValue = _collateralValueInAsset(loan.collateralAmount);
+        uint256 maxBorrow = (collateralValue * ltvBP) / BP_DIVISOR;
+        require(owed > maxBorrow, "not liquidatable");
+
+        asset.safeTransferFrom(msg.sender, address(this), owed);
+
+        uint256 seizeValue = (owed * (BP_DIVISOR + liquidationBonusBP)) / BP_DIVISOR;
+        uint256 seizeCollateral = (seizeValue * RAY) / _latestPrice();
+
+        if (seizeCollateral > loan.collateralAmount) {
+            seizeCollateral = loan.collateralAmount;
+        }
+
+        _resetLoan(loan);
+
+        collateral.safeTransfer(msg.sender, seizeCollateral);
+
+        emit Liquidate(msg.sender, borrower, seizeCollateral, owed);
+    }
+
+
+    function setParams(
+        uint256 _ltvBP,
+        uint256 _annualBorrowRateBP,
+        uint256 _liquidationBonusBP
+    ) external onlyOwner {
+        require(_ltvBP <= BP_DIVISOR, "ltv>100%");
+        ltvBP = _ltvBP;
+        annualBorrowRateBP = _annualBorrowRateBP;
+        liquidationBonusBP = _liquidationBonusBP;
+        emit ParamsUpdated(_ltvBP, _annualBorrowRateBP, _liquidationBonusBP);
+    }
+
+    function setOracle(address _priceFeed) external onlyOwner {
+        require(_priceFeed != address(0), "zero address");
+        priceFeed = AggregatorV3Interface(_priceFeed);
+        emit OracleUpdated(_priceFeed);
+    }
+
+    function emergencyWithdrawToken(IERC20 token, address to, uint256 amount) external onlyOwner {
+        require(amount > 0, "zero");
+        require(address(token) != address(asset) && address(token) != address(collateral), "protected token");
+        token.safeTransfer(to, amount);
+    }
+
+
+    function _calculateInterest(uint256 principal, uint256 timeElapsed) internal view returns (uint256) {
+        if (principal == 0 || timeElapsed == 0) return 0;
+        uint256 numerator = principal * annualBorrowRateBP * timeElapsed;
+        uint256 denominator = BP_DIVISOR * 365 days;
+        return numerator / denominator;
+    }
+
+    function _latestPrice() internal view returns (uint256) {
+        (, int256 answer,,,) = priceFeed.latestRoundData();
+        require(answer > 0, "invalid oracle");
+        return uint256(answer);
+    }
+
+    function _collateralValueInAsset(uint256 collateralAmount) internal view returns (uint256) {
+        uint256 price = _latestPrice(); 
+        return (collateralAmount * price) / RAY;
+    }
+
+    function _resetLoan(Loan storage loan) internal {
+        loan.active = false;
+        loan.principal = 0;
+        loan.collateralAmount = 0;
+        loan.borrowTimestamp = 0;
+    }
+}
