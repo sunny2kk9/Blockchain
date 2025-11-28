@@ -1,0 +1,12 @@
+[package]
+name = "todo_list"
+version = "0.0.0"
+
+[addresses]
+todo_addr = "0xfa0d15bb3a3daa63b66f06422fd508ed972febf24eeeec16dca3ccccc229e55a"
+
+# 👉 This line is CRITICAL: it tells Move what `std::` refers to
+std = "0x1"
+
+[dependencies]
+AptosFramework = { git = "https://github.com/aptos-labs/aptos-framework.git", subdir = "aptos-framework", rev = "mainnet" }
