@@ -1,0 +1,18 @@
+[package]
+name = "assignment3"
+version = "1.0.0"
+authors = []
+
+[addresses]
+module_owner = "_"
+
+[dependencies]
+AptosFramework = { 
+    git = "https://github.com/aptos-labs/aptos-framework.git",
+    rev = "mainnet",
+    subdir = "aptos-framework"
+}
+
+[dev-addresses]
+
+[dev-dependencies]
