@@ -1,6 +1,6 @@
 ## Contract Details
 
-**Deployed Address:** `0xfb24b9c6188adace724d44ea15ad560f5b4aa5f67c51672f7fe910cc2e617f2`
+**Deployed Address:** `0x4726eeba50c8e2267ccca6c0a886f14aa1b8835d6d2213132d9fc8745b11277c`
 
 **Network:** Aptos Devnet
 
