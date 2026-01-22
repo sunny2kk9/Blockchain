@@ -1,0 +1,16 @@
+[package]
+name = "new_adder_project"
+version = "1.0.0"
+authors = []
+
+[addresses]
+adder_addr = "0x9305fe1d49f3f6f1706c9542dc16d753a41f67145ef75e0ff7366140f6643660"
+
+[dev-addresses]
+
+[dependencies.AptosFramework]
+git = "https://github.com/aptos-labs/aptos-framework.git"
+rev = "mainnet"
+subdir = "aptos-framework"
+
+[dev-dependencies]
