@@ -111,89 +111,29 @@ export default function App() {
   }, [provider])
 
   const styles = {
-    page: {
-      minHeight: '100vh',
-      background: 'linear-gradient(135deg, #c3dafe, #fbcfe8)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      fontFamily: "'Inter', sans-serif",
-      padding: 20
-    },
-    card: {
-      width: '100%',
-      maxWidth: 500,
-      background: 'rgba(255, 255, 255, 0.9)',
-      backdropFilter: 'blur(10px)',
-      borderRadius: 16,
-      padding: 32,
-      boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
-      textAlign: 'center'
-    },
-    heading: { fontSize: 24, fontWeight: 600, marginBottom: 16, color: '#1e3a8a' },
-    account: { fontSize: 14, marginBottom: 20, color: '#374151' },
-    buttonRow: { display: 'flex', justifyContent: 'center', gap: 10, flexWrap: 'wrap', marginBottom: 20 },
-    btn: {
-      padding: '10px 16px',
-      borderRadius: 8,
-      border: 'none',
-      fontWeight: 500,
-      cursor: 'pointer',
-      transition: 'all 0.2s ease'
-    },
-    primaryBtn: { background: '#2563eb', color: '#fff' },
-    secondaryBtn: { background: '#e5e7eb', color: '#111827' },
-    inputGroup: { display: 'flex', justifyContent: 'center', marginBottom: 20 },
-    input: {
-      width: '70%',
-      padding: '8px 12px',
-      borderRadius: 8,
-      border: '1px solid #d1d5db',
-      fontSize: 14
-    },
-    valueBox: {
-      fontFamily: 'monospace',
-      fontSize: 28,
-      fontWeight: 'bold',
-      marginBottom: 16,
-      color: '#111827'
-    },
-    status: { fontSize: 13, color: '#6b7280', marginTop: 10 }
+    page: { minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 24, background: '#f3f4f6' },
+    card: { width: '100%', maxWidth: 720, background: '#fff', padding: 24, borderRadius: 12, boxShadow: '0 8px 24px rgba(0,0,0,0.06)' },
+    btnPrimary: { padding: '10px 14px', background: '#2563eb', color: 'white', border: 'none', borderRadius: 8, cursor: 'pointer' }
   }
 
   return (
     <div style={styles.page}>
       <div style={styles.card}>
-        <div style={styles.heading}>🔗 Simple Storage DApp</div>
-        <div style={styles.account}>
-          Connected Account: <b>{account ?? 'Not Connected'}</b>
+        <h2>SimpleStorage (fixed read/write)</h2>
+        <div>Connected account: <code>{account ?? 'not connected'}</code></div>
+        <div style={{ marginTop: 12 }}>
+          <button onClick={connectWallet} style={styles.btnPrimary}>Connect Wallet</button>
+          <button onClick={fetchValue} style={{ marginLeft: 10 }}>Read Value</button>
         </div>
-
-        <div style={styles.buttonRow}>
-          <button onClick={connectWallet} style={{ ...styles.btn, ...styles.primaryBtn }}>
-            Connect Wallet
-          </button>
-          <button onClick={fetchValue} style={{ ...styles.btn, ...styles.secondaryBtn }}>
-            Read Value
-          </button>
+        <div style={{ marginTop: 12 }}>
+          <div>Stored value:</div>
+          <div style={{ fontFamily: 'monospace', fontSize: 24 }}>{value === '' ? '—' : value}</div>
         </div>
-
-        <div style={styles.valueBox}>{value === '' ? '—' : value}</div>
-
-        <div style={styles.inputGroup}>
-          <input
-            type="number"
-            value={inputValue}
-            onChange={e => setInputValue(e.target.value)}
-            placeholder="Enter new value"
-            style={styles.input}
-          />
-          <button onClick={writeValue} style={{ ...styles.btn, ...styles.primaryBtn, marginLeft: 8 }}>
-            Set
-          </button>
+        <div style={{ marginTop: 12 }}>
+          <input type="number" value={inputValue} onChange={e => setInputValue(e.target.value)} placeholder="new numeric value" />
+          <button onClick={writeValue} style={{ marginLeft: 8 }}>Set Value</button>
         </div>
-
-        <div style={styles.status}>{status}</div>
+        <div style={{ marginTop: 12, color: '#6b7280' }}>{status}</div>
       </div>
     </div>
   )
