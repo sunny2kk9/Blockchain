@@ -1,17 +1,19 @@
-// SPDX-License-Identifier: MIT
+
 pragma solidity ^0.8.20;
 
+
 contract SimpleStorage {
-    uint256 private storedValue;
+uint256 private value;
+event ValueChanged(uint256 indexed newValue, address indexed changedBy);
 
-    event ValueChanged(address indexed user, uint256 indexed newValue);
 
-    function setValue(uint256 _value) external {
-        storedValue = _value;
-        emit ValueChanged(msg.sender, _value);
-    }
+function setValue(uint256 _value) external {
+value = _value;
+emit ValueChanged(_value, msg.sender);
+}
 
-    function getValue() external view returns (uint256) {
-        return storedValue;
-    }
+
+function getValue() external view returns (uint256) {
+return value;
+}
 }
