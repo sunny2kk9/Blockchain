@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lending Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>My Simple Lending Dashboard</h1>
+
+    <button id="connectButton">Connect Wallet</button>
+    <p>Status: <span id="status">Not Connected</span></p>
+
+    <hr>
+
+    <div class="card">
+        <h3>Check Health Factor</h3>
+        <p>Check the health factor of any wallet address.</p>
+        <input type="text" id="healthFactorAddress" placeholder="Enter user address">
+        <button id="getHealthFactorButton">Get Health</button>
+        <p>Health Factor: <strong id="healthFactorResult">...</strong></p>
+    </div>
+
+    <div class="card">
+        <h3>Deposit Tokens</h3>
+        <p>Deposit Token A (Loan Token) into the pool.</p>
+        <input type="number" id="depositAmount" placeholder="Amount of Token A">
+        <button id="depositButton">Deposit</button>
+        <p id="depositStatus"></p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

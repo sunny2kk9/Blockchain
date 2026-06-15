@@ -1,0 +1,17 @@
+EXPLANATION OF THE CODE
+
+This Solidity smart contract implements a basic lending and borrowing system using OpenZeppelin libraries for safety and simplicity. 
+
+Libraries that i used are IERC20 and SafeERC20, for safe token transfers and ERC20 for compatibility and Ownable that allows contract ownership control (only the owner can perform admin actions). 
+
+Key Components are as follows
+collateralToken and loanToken: ERC20 tokens used for depositing and borrowing.
+collateralFactor: Defines the over-collateralization ratio (e.g., 150% means you must deposit 1.5x the loan amount).
+collateral and debt mappings: Track how much collateral a user has deposited and how much they owe. 
+
+Functions used in the ocde
+depositCollateral(uint256 amount) - User deposits collateral tokens into the contract. These tokens are stored and increase their collateral balance.
+borrow(uint256 amount) - Allows user to borrow loan tokens up to the allowed limit based on their deposited collateral. Checks ensure sufficient collateralization. 
+repay(uint256 amount) - The borrower repays their debt by transferring loan tokens back to the contract.
+withdrawCollateral(uint256 amount) - Let users withdraw their collateral only if they have no remaining debt. 
+

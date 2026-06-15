@@ -1,0 +1,10 @@
+[package]
+name = "MyAssignment"
+version = "1.0.0"
+upgrade_policy = "compatible"
+
+[addresses]
+message = "0x68a57f6d4699541bd59021260b19ec9580f65da8f799a5c463c2e474a827fff3"
+
+[dependencies]
+AptosFramework = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/aptos-framework", rev = "main" }
