@@ -1,0 +1,17 @@
+# GitHub Assignment Submission Collector — Dependencies
+# Install with: pip install -r requirements.txt
+
+# GitHub REST API wrapper
+PyGithub==2.3.0
+
+# Git operations (clone, checkout, commit, push)
+GitPython==3.1.43
+
+# HTTP with connection pooling (used internally by PyGithub)
+requests==2.32.3
+
+# Retry logic with exponential back-off
+tenacity==8.3.0
+
+# Type hints back-port (Python < 3.10 compatibility)
+typing_extensions==4.12.2

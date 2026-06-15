@@ -1,0 +1,380 @@
+========================================================================
+ ASSIGNMENT 3 — SUBMISSION COLLECTION REPORT
+ Generated: 2026-06-15T17:37:07.126232Z
+========================================================================
+ Total forks scanned : 62
+ Branch found        : 6
+ Branch not found    : 56
+ Total files copied  : 519
+========================================================================
+
+┌─ youfoundmee
+│  Repo URL    : https://github.com/youfoundmee/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ shantappa-hulsure
+│  Repo URL    : https://github.com/shantappa-hulsure/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ imranasumbul
+│  Repo URL    : https://github.com/imranasumbul/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ vivekathore
+│  Repo URL    : https://github.com/vivekathore/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ krahul70248
+│  Repo URL    : https://github.com/krahul70248/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ abinash-30
+│  Repo URL    : https://github.com/abinash-30/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ punityadav2
+│  Repo URL    : https://github.com/punityadav2/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ BanavathMurali
+│  Repo URL    : https://github.com/BanavathMurali/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ goutam2004
+│  Repo URL    : https://github.com/goutam2004/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ Amanverma1234512345
+│  Repo URL    : https://github.com/Amanverma1234512345/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ BeingAnurag
+│  Repo URL    : https://github.com/BeingAnurag/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ MrImmortal09
+│  Repo URL    : https://github.com/MrImmortal09/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ Sailokesh321
+│  Repo URL    : https://github.com/Sailokesh321/Blockchain-IT-57
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ VedantJadhav0017
+│  Repo URL    : https://github.com/VedantJadhav0017/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ Aditya2023003
+│  Repo URL    : https://github.com/Aditya2023003/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ atulgond
+│  Repo URL    : https://github.com/atulgond/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ SohamBalwant
+│  Repo URL    : https://github.com/SohamBalwant/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ sahinkaushar17
+│  Repo URL    : https://github.com/sahinkaushar17/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ KaramtotPavan
+│  Repo URL    : https://github.com/KaramtotPavan/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ sairamsharan
+│  Repo URL    : https://github.com/sairamsharan/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ mani4002
+│  Repo URL    : https://github.com/mani4002/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ tharunmudavath123
+│  Repo URL    : https://github.com/tharunmudavath123/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ dheeraj2323
+│  Repo URL    : https://github.com/dheeraj2323/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ arjunkunwar16
+│  Repo URL    : https://github.com/arjunkunwar16/Blockchain
+│  Branch      : ✔ FOUND
+│  Files copied: 49
+│    • .DS_Store
+│    • README.md
+│    • Arjun_Kunwar_LCI2023026/LendBorrow.sol
+│    • getter_setter_assignment/.DS_Store
+│    • move-assignment/.DS_Store
+│    • move-assignment/.gitignore
+│    • move-assignment/README.md
+│    • move-assignment/Move.toml
+│    • getter_setter_assignment/front/index.html
+│    • getter_setter_assignment/front/package.json
+│    … and 39 more
+│
+┌─ kunwararjun
+│  Repo URL    : https://github.com/kunwararjun/BlockchainAssignment
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ Lakshya0000
+│  Repo URL    : https://github.com/Lakshya0000/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ digvijay-555
+│  Repo URL    : https://github.com/digvijay-555/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ leelaakash
+│  Repo URL    : https://github.com/leelaakash/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ Aryansharma12344323
+│  Repo URL    : https://github.com/Aryansharma12344323/BlockchainAssignment
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ NotVishesh
+│  Repo URL    : https://github.com/NotVishesh/Blockchain-acads
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ adarshverma27
+│  Repo URL    : https://github.com/adarshverma27/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ ashwinisingh17
+│  Repo URL    : https://github.com/ashwinisingh17/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ Aditya-Singh-Chandel
+│  Repo URL    : https://github.com/Aditya-Singh-Chandel/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ AmanChoudhary17
+│  Repo URL    : https://github.com/AmanChoudhary17/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ Siri-Maya-Lalitha-10
+│  Repo URL    : https://github.com/Siri-Maya-Lalitha-10/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ kirulegion
+│  Repo URL    : https://github.com/kirulegion/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ arunkumar-49
+│  Repo URL    : https://github.com/arunkumar-49/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ AshwinGajbhiye
+│  Repo URL    : https://github.com/AshwinGajbhiye/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ Vedamsh27
+│  Repo URL    : https://github.com/Vedamsh27/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ sumit0770
+│  Repo URL    : https://github.com/sumit0770/Blockchain
+│  Branch      : ✔ FOUND
+│  Files copied: 19
+│    • README.md
+│    • Getter_Setter_LCS2023048/package.json
+│    • Getter_Setter_LCS2023048/package-lock.json
+│    • Getter_Setter_LCS2023048/.gitignore
+│    • Getter_Setter_LCS2023048/hardhat.config.js
+│    • Getter_Setter_LCS2023048/README.md
+│    • Blockchain-Assignment-3/.DS_Store
+│    • Blockchain-Assignment-3/README.md
+│    • Sangale_Sumit_Mahadeo_LCS2023048/contract.sol
+│    • Getter_Setter_LCS2023048/contracts/GetSet.sol
+│    … and 9 more
+│
+┌─ vishal18713
+│  Repo URL    : https://github.com/vishal18713/Blockchain
+│  Branch      : ✔ FOUND
+│  Files copied: 17
+│    • README.md
+│    • Vishal_Satpute_LCS2023052/contract.sol
+│    • Lab_Assignment/package.json
+│    • Lab_Assignment/package-lock.json
+│    • Lab_Assignment/.gitignore
+│    • Lab_Assignment/hardhat.config.js
+│    • Lab_Assignment/README.md
+│    • Lab_Assignment/contracts/GetSet.sol
+│    • Lab_Assignment/scripts/deploy.js
+│    • Lab_Assignment/src/contract_data/GetSet.json
+│    … and 7 more
+│
+┌─ psg-19
+│  Repo URL    : https://github.com/psg-19/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ justkarsh
+│  Repo URL    : https://github.com/justkarsh/Blockchain-Utkarsh-Gupta-
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ ShrishtiDubey27
+│  Repo URL    : https://github.com/ShrishtiDubey27/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ ananyavarshney1
+│  Repo URL    : https://github.com/ananyavarshney1/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ Shashank1913
+│  Repo URL    : https://github.com/Shashank1913/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ Amritanshu05
+│  Repo URL    : https://github.com/Amritanshu05/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ Akhandp10
+│  Repo URL    : https://github.com/Akhandp10/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ Abhinavsagarr
+│  Repo URL    : https://github.com/Abhinavsagarr/Blockchain-acads
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ AyushiiiAwasthi
+│  Repo URL    : https://github.com/AyushiiiAwasthi/Blockchain_Ayushi_LCI2023007
+│  Branch      : ✔ FOUND
+│  Files copied: 4
+│    • assignment.sol
+│    • README.md
+│    • move.toml
+│    • source/owner.move
+│
+┌─ Swyamk
+│  Repo URL    : https://github.com/Swyamk/Blockchain-acads
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ anadimehta
+│  Repo URL    : https://github.com/anadimehta/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ anadi-mehta
+│  Repo URL    : https://github.com/anadi-mehta/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ muskan191103
+│  Repo URL    : https://github.com/muskan191103/Blockchain
+│  Branch      : ✔ FOUND
+│  Files copied: 20
+│    • README.md
+│    • Lending_Protocol/contract.sol
+│    • Lending_Protocol/README.md
+│    • AptosDiceGame/README.MD
+│    • AptosDiceGame/.gitignore
+│    • AptosDiceGame/Move.toml
+│    • LAB Assignment/package.json
+│    • LAB Assignment/.gitignore
+│    • LAB Assignment/hardhat.config.js
+│    • LAB Assignment/README.md
+│    … and 10 more
+│
+┌─ ananyakuchhal
+│  Repo URL    : https://github.com/ananyakuchhal/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ emoanushka
+│  Repo URL    : https://github.com/emoanushka/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ eshant742
+│  Repo URL    : https://github.com/eshant742/Blockchain_LCB2023016_EshantGupta
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ erinhdsilva
+│  Repo URL    : https://github.com/erinhdsilva/Blockchain
+│  Branch      : ✔ FOUND
+│  Files copied: 410
+│    • LCB2023026_Erin_Helga_D_Silva/package.json
+│    • LCB2023026_Erin_Helga_D_Silva/package-lock.json
+│    • LCB2023026_Erin_Helga_D_Silva/.gitignore
+│    • LCB2023026_Erin_Helga_D_Silva/hardhat.config.js
+│    • LCB2023026_Erin_Helga_D_Silva/README.md
+│    • Erin_Helga_D_Silva_LCB2023026/LendingBorrowing.sol
+│    • assignment/README.md
+│    • assignment/Move.toml
+│    • LCB2023026_Erin_Helga_D_Silva/frontend/package.json
+│    • LCB2023026_Erin_Helga_D_Silva/frontend/package-lock.json
+│    … and 400 more
+│
+┌─ Priyanshushah1804
+│  Repo URL    : https://github.com/Priyanshushah1804/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ nithincod
+│  Repo URL    : https://github.com/nithincod/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ Shresth17
+│  Repo URL    : https://github.com/Shresth17/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+┌─ khushalmidha
+│  Repo URL    : https://github.com/khushalmidha/Blockchain
+│  Branch      : ✘ NOT FOUND
+│  Files copied: 0
+│
+========================================================================
