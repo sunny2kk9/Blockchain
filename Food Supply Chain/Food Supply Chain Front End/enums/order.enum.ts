@@ -1,0 +1,33 @@
+export enum OrderStatusText {
+    ORDERED = "Ordered",
+    ORDER_ACCEPTED = "Order Accepted",
+    ORDER_REJECTED = "Order Rejected",
+    ORDER_PREPARED = "Order Prepared",
+    SUBMIT_TO_QA = "Submitted to QA",
+    QA_APPROVED = "QA Approved",
+    QA_FAILED = "QA Failed",
+    DISPATCH = "Order Dispatched",
+    DELIVERY_RECEIVED = "Delivery Received",
+    DELIVERY_REJECTED = "Delivery Rejected",
+    ORDER_FULFILLED = "Order Fulfilled",
+    PAYMENT_ONHOLD = "Payment On Hold",
+    PICKUP_ORDER = "Pickup Order",
+    ORDER_DELIVERED = "Order Delivered",
+}
+
+export enum OrderStatus {
+    ORDERED = 1,
+    ORDER_ACCEPTED = 2,
+    ORDER_REJECTED = 3,
+    ORDER_PREPARED = 4,
+    SUBMIT_TO_QA = 5,
+    QA_APPROVED = 6,
+    QA_FAILED = 7,
+    DISPATCH = 8,
+    DELIVERY_RECEIVED = 9,
+    DELIVERY_REJECTED = 10,
+    ORDER_FULFILLED = 11,
+    PAYMENT_ONHOLD = 12,
+    PICKUP_ORDER = 13,
+    ORDER_DELIVERED = 14,
+}
