@@ -1,0 +1,15 @@
+[package]
+name = "vedamsh-aptos"
+version = "1.0.0"
+authors = []
+
+[addresses]
+deployer_addr = "0x1188ef4473955d770d19bcc6c252ae6dc8c2c8a091d7d05f1ffcd1124be08843"
+[dev-addresses]
+
+[dependencies.AptosFramework]
+git = "https://github.com/aptos-labs/aptos-framework.git"
+rev = "mainnet"
+subdir = "aptos-framework"
+
+[dev-dependencies]
