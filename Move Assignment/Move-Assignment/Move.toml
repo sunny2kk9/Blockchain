@@ -1,0 +1,12 @@
+[package]
+name = "Move-Assignment"
+version = "1.0.0"
+authors = []
+
+[addresses]
+Move_Assignment = "0xb49e729f4820963fe4d306a3d30ed1de8aa0b7e2ef9b2a3e850be42a46067f2e"
+
+[dependencies.AptosFramework]
+git = "https://github.com/aptos-labs/aptos-framework.git"
+rev = "mainnet"
+subdir = "aptos-framework"
