@@ -1,0 +1,12 @@
+[package]
+name = "blockchain-lab"
+version = "1.0.0"
+authors = []
+
+[addresses]
+blockchain_assignment = "0x8edf0a435bc7180e99dbf09068b5b3312d1d998199177e4beb6b79e85a4401dc"
+
+[dependencies.AptosFramework]
+git = "https://github.com/aptos-labs/aptos-framework.git"
+rev = "mainnet"
+subdir = "aptos-framework"
