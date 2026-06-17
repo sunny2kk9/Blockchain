@@ -1,0 +1,17 @@
+[package]
+name = "multiply_contract"
+version = "1.0.0"
+authors = []
+
+
+[addresses]
+multiply_contract = "0x41dc2dbd7a1970b9318e4eb57d4fb6e1eb59115befa8a7e3428a6d873661e455"
+
+[dev-addresses]
+
+[dependencies.AptosFramework]
+git = "https://github.com/aptos-labs/aptos-framework.git"
+rev = "mainnet"
+subdir = "aptos-framework"
+
+[dev-dependencies]
