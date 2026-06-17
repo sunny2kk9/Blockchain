@@ -1,0 +1,11 @@
+[package]
+name = "blockassign"
+version = "1.0.0"
+
+[addresses]
+blockassign = "0x1355e94df5c41b04ea6a26a39a972caf02a7e3f75f91da7ae7a275ee7501a9d3"
+
+[dependencies.AptosFramework]
+git = "https://github.com/aptos-labs/aptos-core.git"
+rev = "mainnet"
+subdir = "aptos-move/framework/aptos-framework"
