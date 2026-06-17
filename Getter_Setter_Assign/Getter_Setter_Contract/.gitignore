@@ -1,0 +1,5 @@
+/lib
+/out
+/.cache
+/forge-debug-files
+*.env

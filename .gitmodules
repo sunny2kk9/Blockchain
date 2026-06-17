@@ -1,0 +1,3 @@
+[submodule "Getter_Setter_Assign/lib/forge-std"]
+	path = Getter_Setter_Assign/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
